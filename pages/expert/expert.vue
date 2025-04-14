@@ -7,7 +7,7 @@
 		<hr class="solidLine">
 		<view class="function-modules">
 			<view class="module" @click="openPopup">详细数据显示</view>
-			<view class="module">待开发功能二</view>
+			<view class="module" @click="goToModel">大棚3D模型展示</view>
 		</view>
 		<detailDataCom ref="popupRef" title="自定义标题" content="自定义内容" />
 	</view>
@@ -23,6 +23,12 @@
 	// 打开弹窗的方法
 	const openPopup = () => {
 		popupRef.value.openPopup();
+	};
+	// 打开3D模型页面
+	const goToModel = () => {
+		uni.navigateTo({
+			url: `/pages/module/model`
+		});
 	};
 </script>
 

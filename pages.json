@@ -60,7 +60,12 @@
 			"navigationBarTitleText": "详细光照强度信息",
 			"enablePullDownRefresh": false
 		}
-	} ],
+	}, {
+		"path": "pages/module/model",
+		"style": {
+			"navigationBarTitleText": "3D模型展示"
+		}
+	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
