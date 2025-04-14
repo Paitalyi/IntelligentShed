@@ -1,0 +1,7 @@
+@font-face {
+	font-family: 'shuhei';
+	src: url('./AlimamaShuHeiTi-Bold.woff2')format('woff2'),
+		url('./AlimamaShuHeiTi-Bold.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}

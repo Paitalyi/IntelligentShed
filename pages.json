@@ -1,0 +1,107 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "大棚管理助手",
+			"enablePullDownRefresh": true
+
+		}
+	}, {
+		"path": "pages/announcement/announcement",
+		"style": {
+			"navigationBarTitleText": "广告页",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/mine/mine",
+		"style": {
+			"navigationBarTitleText": "专家模式",
+			"enablePullDownRefresh": false
+		}
+	}, {
+		"path": "pages/module/dataMonitor",
+		"style": {
+			"navigationBarTitleText": "数据监控",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/module/deviceManagement",
+		"style": {
+			"navigationBarTitleText": "设备管理",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/module/intelligentAssistant",
+		"style": {
+			"navigationBarTitleText": "智慧助手",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/detailData/temDetail",
+		"style": {
+			"navigationBarTitleText": "详细温度信息",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/detailData/moisDeatail",
+		"style": {
+			"navigationBarTitleText": "详细土壤湿度信息",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/detailData/carbonDioxide",
+		"style": {
+			"navigationBarTitleText": "详细二氧化碳浓度信息",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/detailData/lightIntensity",
+		"style": {
+			"navigationBarTitleText": "详细光照强度信息",
+			"enablePullDownRefresh": false
+		}
+	}, {
+		"path": "pages/test/test",
+		"style": {
+			"navigationBarTitleText": "测试",
+			"enablePullDownRefresh": false
+		}
+	} ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#f7f7f7",
+		"navigationStyle": "default",
+		"backgroundColor": "#F8F8F8",
+
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"color": "#999",
+		"selectedColor": "#515151",
+		"backgroundColor": "#f7f7f7",
+		"fontSize": "30rpx",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "common/icon-tabBar/home.png",
+				"selectedIconPath": "common/icon-tabBar/home_h.png"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"text": "专家模式",
+				"iconPath": "common/icon-tabBar/expert.png",
+				"selectedIconPath": "common/icon-tabBar/expert_h.png"
+			}
+		]
+	}
+}
