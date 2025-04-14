@@ -7,14 +7,7 @@
 
 		}
 	}, {
-		"path": "pages/announcement/announcement",
-		"style": {
-			"navigationBarTitleText": "广告页",
-			"enablePullDownRefresh": false
-		}
-
-	}, {
-		"path": "pages/mine/mine",
+		"path": "pages/expert/expert",
 		"style": {
 			"navigationBarTitleText": "专家模式",
 			"enablePullDownRefresh": false
@@ -67,12 +60,6 @@
 			"navigationBarTitleText": "详细光照强度信息",
 			"enablePullDownRefresh": false
 		}
-	}, {
-		"path": "pages/test/test",
-		"style": {
-			"navigationBarTitleText": "测试",
-			"enablePullDownRefresh": false
-		}
 	} ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -97,7 +84,7 @@
 				"selectedIconPath": "common/icon-tabBar/home_h.png"
 			},
 			{
-				"pagePath": "pages/mine/mine",
+				"pagePath": "pages/expert/expert",
 				"text": "专家模式",
 				"iconPath": "common/icon-tabBar/expert.png",
 				"selectedIconPath": "common/icon-tabBar/expert_h.png"

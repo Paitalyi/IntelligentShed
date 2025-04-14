@@ -21,9 +21,8 @@
 		<view class="swiper_container">
 			<swiper :indicator-dots="true" :autoplay="true" :interval="8000" :duration="1000">
 				<swiper-item>
-					<view @click="goToAnnouncementDetail(announcements[0].id)" class="announcement-item">
-						<text :style="{color: a1Color?'green':'red'}"
-							class="anoun1">{{ announcements[0].content }}</text>
+					<view class="announcement-item">
+						<text :style="{color: a1Color?'green':'red'}" class="anoun1">{{ announcement.content }}</text>
 					</view>
 				</swiper-item>
 				<!-- 第二个 swiper-item-->
@@ -85,6 +84,21 @@
 		onBeforeUnmount
 	} from 'vue';
 	import axios from 'axios';
+	import {
+		useFetch
+	} from '@/composables/useFetch.js';
+
+	const {
+		isIrrAuto,
+		isLightAuto,
+		isVentAuto,
+		isIrrSwitchOpen,
+		isLightSwitchOpen,
+		isVentSwitchOpen,
+		relativeUrlList,
+		sendGetRequest,
+		initStatus
+	} = useFetch();
 
 	// 假设这是在 uni-app 环境中，uni 是全局对象，一般不需要显式引入
 	// 如果是普通 Vue 项目，需要额外处理
@@ -113,28 +127,10 @@
 	const intervalId = ref(null);
 	const lastDataList = ref({});
 	const a1Color = ref(false);
-	const announcements = ref([{
-			id: 1,
-			title: '公告1',
-			content: '当前大棚温度与光照强度异常。'
-		},
-		{
-			id: 2,
-			title: '公告2',
-			content: '当前大棚温度与光照强度异常。'
-		},
-		{
-			id: 3,
-			title: '公告3',
-			content: '当前大棚温度与光照强度异常。'
-		}
-	]);
-
-	const goToAnnouncementDetail = (id) => {
-		uni.navigateTo({
-			url: `/pages/announcement/announcement?id=${id}`
-		});
-	};
+	const announcement = ref({
+		title: '公告',
+		content: '当前大棚温度与光照强度异常。'
+	});
 
 	const goToModule = (moduleName) => {
 		uni.navigateTo({
@@ -192,10 +188,10 @@
 				if (dataList.value.co2.status !== 'NORMAL') {
 					abnormalItems.push('二氧化碳浓度');
 				}
-				announcements.value[0].content = `当前大棚${abnormalItems.join('和')}数据异常，请尽快处理。`;
+				announcement.content = `当前大棚${abnormalItems.join('和')}数据异常，请尽快处理。`;
 			} else {
 				a1Color.value = true;
-				announcements.value[0].content = '当前大棚数据正常，请放心。';
+				announcement.content = '当前大棚数据正常，请放心。';
 			}
 		} catch (error) {
 			// 抓到异常后如果，上次加载的数据不为空则使用上次的数据
@@ -214,112 +210,6 @@
 		}
 	};
 
-	// 自动模块
-	// 灌溉、补光、通风
-	const isIrrAuto = ref(false);
-	const isLightAuto = ref(false);
-	const isVentAuto = ref(false);
-	// 灌溉、补光、通风运行状态
-	const isIrrSwitchOpen = ref(false);
-	const isLightSwitchOpen = ref(false);
-	const isVentSwitchOpen = ref(false);
-
-	// 基础 URL
-	const baseUrl = 'http://192.168.20.237:8080';
-	const relativeUrlList = {
-		switch1: {
-			status: '/judgeIrrAuto'
-		},
-		switch2: {
-			status: '/judgeLightAuto'
-		},
-		switch3: {
-			status: '/judgeVentAuto'
-		},
-		switch4: {
-			status: '/judgeIrrActive'
-		},
-		switch5: {
-			status: '/judgeLightActive'
-		},
-		switch6: {
-			status: '/judgeVentActive'
-		}
-	};
-
-	// 封装通用的发送 GET 请求的方法
-	const sendGetRequest = async (relativeUrl) => {
-		const fullUrl = `${baseUrl}${relativeUrl}`;
-		try {
-			const response = await axios.get(fullUrl);
-			return response.data;
-		} catch (error) {
-			console.error('网络请求失败:', error);
-			// 根据实际需求决定是否重新抛出错误
-			// throw error;
-			return false; // 可以返回 null 或其他默认值，以避免调用处的错误处理过于复杂
-		}
-	};
-
-	// 封装开关状态改变的处理逻辑
-	const fetchAutoIrrigationStatus = async () => {
-		return sendGetRequest(relativeUrlList.switch1.status);
-	};
-
-	const fetchAutoLightStatus = async () => {
-		return sendGetRequest(relativeUrlList.switch2.status);
-	};
-
-	const fetchAutoVentilationStatus = async () => {
-		return sendGetRequest(relativeUrlList.switch3.status);
-	};
-
-	const fetchManualIrrigationStatus = async () => {
-		return sendGetRequest(relativeUrlList.switch4.status);
-	};
-
-	const fetchManualLightStatus = async () => {
-		return sendGetRequest(relativeUrlList.switch5.status);
-	};
-
-	const fetchManualVentilationStatus = async () => {
-		return sendGetRequest(relativeUrlList.switch6.status);
-	};
-
-	const initStatus = async () => {
-		try {
-			// 并发获取所有状态（优化性能）
-			const [autoIrrigation, autoLight, autoVentilation,
-				manualIrrigation, manualLight, manualVentilation
-			] = await Promise.all([
-				fetchAutoIrrigationStatus(),
-				fetchAutoLightStatus(),
-				fetchAutoVentilationStatus(),
-				fetchManualIrrigationStatus(),
-				fetchManualLightStatus(),
-				fetchManualVentilationStatus()
-			]);
-
-			// 赋值状态
-			isIrrAuto.value = autoIrrigation;
-			isLightAuto.value = autoLight;
-			isVentAuto.value = autoVentilation;
-			isIrrSwitchOpen.value = manualIrrigation;
-			isLightSwitchOpen.value = manualLight;
-			isVentSwitchOpen.value = manualVentilation;
-
-		} catch (error) {
-			console.error("初始化失败", error);
-			// 使用 uni-app 提示（支持小程序/H5/APP）
-			uni.showToast({
-				title: "初始化状态获取失败，请重试",
-				icon: "none", // 不显示图标
-				duration: 2000 // 显示 2 秒
-			});
-			// 可选：初始化失败时恢复默认状态（根据需求）
-			// isIrrAuto.value = false; // 按需恢复
-		}
-	};
 	// 定义设置默认值的函数
 	const setDefaultValues = () => {
 		dataList.value = {
