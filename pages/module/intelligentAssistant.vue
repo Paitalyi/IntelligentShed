@@ -1,6 +1,7 @@
 <template>
 	<view>
 		<!-- 这里可以放置组件的其他内容 -->
+
 		<web-view :src="webViewSrc"></web-view>
 	</view>
 </template>
@@ -11,7 +12,7 @@
 	} from 'vue';
 
 	// 定义 web-view 要加载的 URL
-	const webViewSrc = ref('http://192.168.20.25:8080/ui/chat/f9ae5fa1d2a8f84b');
+	const webViewSrc = ref('http://192.168.20.25:8080/ui/chat/f5a9c66c6cd74352');
 </script>
 
 <style scoped>

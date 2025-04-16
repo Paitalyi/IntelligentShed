@@ -294,7 +294,7 @@
 		height: 100%;
 		box-sizing: border-box;
 		border-radius: 10px;
-		border: 1px solid #cad1c3;
+
 		width: 100%;
 
 		.anoun {
@@ -424,7 +424,7 @@
 		}
 
 		.left-upper {
-			margin: 10rpx;
+			margin: 15rpx;
 			// text-align: center;
 			width: 45%;
 			height: 110rpx;
@@ -435,7 +435,7 @@
 
 		.right-upper {
 			position: relative;
-			margin: 10rpx;
+			margin: 15rpx;
 			width: 45%;
 			height: 110rpx;
 			border-radius: 10px;
