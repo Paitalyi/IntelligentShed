@@ -94,7 +94,7 @@ export function useFetch() {
 	const fetchManualVentilationStatus = async () => {
 		return await sendGetRequest(relativeUrlList.switch6.status);
 	};
-	
+
 	const initStatus = async () => {
 		try {
 			// 并发获取所有状态（优化性能）
@@ -108,7 +108,7 @@ export function useFetch() {
 				fetchManualLightStatus(),
 				fetchManualVentilationStatus()
 			]);
-	
+
 			// 赋值状态
 			isIrrAuto.value = autoIrrigation;
 			isLightAuto.value = autoLight;
@@ -116,7 +116,7 @@ export function useFetch() {
 			isIrrSwitchOpen.value = manualIrrigation;
 			isLightSwitchOpen.value = manualLight;
 			isVentSwitchOpen.value = manualVentilation;
-	
+
 		} catch (error) {
 			console.error("初始化失败", error);
 			// 使用 uni-app 提示（支持小程序/H5/APP）

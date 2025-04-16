@@ -6,7 +6,8 @@
 				<view class="text_block1">
 					{{name}}
 				</view>
-				<switch class="switch" :modelValue="isSwitchOpen" @change="switchChange" :checked="isSwitchOpen" :disabled="isDisabled"/>
+				<switch class="switch" :modelValue="isSwitchOpen" @change="switchChange" :checked="isSwitchOpen"
+					:disabled="isDisabled" />
 			</view>
 			<!--文本部分-->
 			<view class="text_block2">
@@ -23,7 +24,7 @@
 		description,
 		isSwitchOpen,
 		switchChange,
-		isDisabled=false
+		isDisabled = false
 	} = defineProps(['name', 'icon', 'description', 'isSwitchOpen', 'switchChange', 'isDisabled']);
 </script>
 

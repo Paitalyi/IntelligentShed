@@ -16,7 +16,7 @@
 		unit,
 		obj
 	} = defineProps(['name', 'unit', 'obj'])
-	
+
 	// 定义根据状态获取颜色的函数
 	const getColor = (status) => {
 		switch (status) {

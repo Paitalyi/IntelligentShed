@@ -60,11 +60,14 @@
 		ref
 	} from "vue";
 	import axios from 'axios'; // 需先安装 axios：npm install axios
+	import { useFetch } from '../../composables/useFetch';
 
 	const showInputA = ref(false);
 	const showInputB = ref(false);
 
-	const url = 'http://192.168.20.237:8080/updateThresholds';
+	const { baseUrl } = useFetch();
+	const relativeUrl = '/updateThresholds';
+	const url = `${baseUrl}${relativeUrl}`;
 
 
 	const handleConfirmA = async (data) => {
