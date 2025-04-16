@@ -22,7 +22,7 @@ export function useFetch() {
 	const isVentSwitchOpen = ref(false);
 
 	// 基础 URL
-	const baseUrl = 'http://192.168.20.237:8080';
+	const baseUrl = 'http://192.168.20.110:8080';
 	const relativeUrlList = {
 		switch1: {
 			on: '/irrigationControl',
@@ -137,6 +137,7 @@ export function useFetch() {
 		isIrrSwitchOpen,
 		isLightSwitchOpen,
 		isVentSwitchOpen,
+		baseUrl,
 		relativeUrlList,
 		sendGetRequest,
 		initStatus

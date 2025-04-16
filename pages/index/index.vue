@@ -22,7 +22,7 @@
 			<swiper :indicator-dots="true" :autoplay="true" :interval="8000" :duration="1000">
 				<swiper-item>
 					<view class="announcement-item">
-						<text :style="{color: a1Color?'green':'red'}" class="anoun1">{{ announcement.content }}</text>
+						<text :style="{color: annoColor?'green':'red'}" class="anoun">{{ announcement.content }}</text>
 					</view>
 				</swiper-item>
 				<!-- 第二个 swiper-item-->
@@ -95,6 +95,7 @@
 		isIrrSwitchOpen,
 		isLightSwitchOpen,
 		isVentSwitchOpen,
+		baseUrl,
 		relativeUrlList,
 		sendGetRequest,
 		initStatus
@@ -104,7 +105,8 @@
 	// 如果是普通 Vue 项目，需要额外处理
 
 	// 获取数据的 url
-	const url = 'http://192.168.20.237:8080/getAlarm';
+	const relativeUrl = '/getAlarm';
+	const url = `${baseUrl}${relativeUrl}`;
 	// 定义响应式数据
 	const dataList = ref({
 		temperature: {
@@ -126,7 +128,7 @@
 	});
 	const intervalId = ref(null);
 	const lastDataList = ref({});
-	const a1Color = ref(false);
+	const annoColor = ref(false);
 	const announcement = ref({
 		title: '公告',
 		content: '当前大棚温度与光照强度异常。'
@@ -174,24 +176,24 @@
 			}
 			const hasAbnormal = Object.values(dataList.value).some(item => item.status !== 'NORMAL');
 			if (hasAbnormal) {
-				a1Color.value = false;
+				annoColor.value = false;
 				let abnormalItems = [];
 				if (dataList.value.temperature.status !== 'NORMAL') {
-					abnormalItems.push('温度');
+					abnormalItems.push('「温度」');
 				}
 				if (dataList.value.light.status !== 'NORMAL') {
-					abnormalItems.push('光照强度');
+					abnormalItems.push('「光照强度」');
 				}
 				if (dataList.value.soil.status !== 'NORMAL') {
-					abnormalItems.push('土壤湿度');
+					abnormalItems.push('「土壤湿度」');
 				}
 				if (dataList.value.co2.status !== 'NORMAL') {
-					abnormalItems.push('二氧化碳浓度');
+					abnormalItems.push('「二氧化碳浓度」');
 				}
-				announcement.content = `当前大棚${abnormalItems.join('和')}数据异常，请尽快处理。`;
+				announcement.value.content = `当前大棚${abnormalItems.join('和')}数据异常，请尽快处理。`;
 			} else {
-				a1Color.value = true;
-				announcement.content = '当前大棚数据正常，请放心。';
+				annoColor.value = true;
+				announcement.value.content = '当前大棚数据正常，请放心。';
 			}
 		} catch (error) {
 			// 抓到异常后如果，上次加载的数据不为空则使用上次的数据
@@ -295,7 +297,7 @@
 		border: 1px solid #cad1c3;
 		width: 100%;
 
-		.anoun1 {
+		.anoun {
 			margin: 40rpx 20rpx;
 			padding: 50rpx;
 			border-radius: 10px;
